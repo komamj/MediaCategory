@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MadiaCategory</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="fragment_title">
+        <item>Audio</item>
+        <item>Video</item>
+        <item>Image</item>
+    </string-array>
+</resources>
