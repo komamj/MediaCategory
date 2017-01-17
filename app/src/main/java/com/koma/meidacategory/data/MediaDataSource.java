@@ -2,7 +2,7 @@ package com.koma.meidacategory.data;
 
 import com.koma.meidacategory.data.model.AudioFile;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import rx.Observable;
 
@@ -11,5 +11,5 @@ import rx.Observable;
  */
 
 public interface MediaDataSource {
-    Observable<ArrayList<AudioFile>> getAudioFiles();
+    Observable<List<AudioFile>> getAudioFiles();
 }

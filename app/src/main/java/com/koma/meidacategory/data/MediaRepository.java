@@ -3,7 +3,7 @@ package com.koma.meidacategory.data;
 import com.koma.meidacategory.data.model.AudioFile;
 import com.koma.meidacategory.util.LogUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import rx.Observable;
 
@@ -11,14 +11,16 @@ import rx.Observable;
  * Created by koma on 2017/1/14.
  */
 
-public class MediaRepository implements MediaDataSource{
+public class MediaRepository implements MediaDataSource {
     private static final String TAG = MediaRepository.class.getSimpleName();
     private static MediaRepository sRespository;
     private LocalDataSource mLocalDataSource;
-    private MediaRepository(){
+
+    private MediaRepository() {
         mLocalDataSource = new LocalDataSource();
     }
-    public synchronized static MediaRepository getInstance(){
+
+    public synchronized static MediaRepository getInstance() {
         if (sRespository == null) {
             synchronized (MediaRepository.class) {
                 if (sRespository == null) {
@@ -30,8 +32,8 @@ public class MediaRepository implements MediaDataSource{
     }
 
     @Override
-    public Observable<ArrayList<AudioFile>> getAudioFiles() {
-        LogUtils.i(TAG,"getAudioFiles");
+    public Observable<List<AudioFile>> getAudioFiles() {
+        LogUtils.i(TAG, "getAudioFiles");
         return mLocalDataSource.getAudioFiles();
     }
 }

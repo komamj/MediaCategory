@@ -18,60 +18,75 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
     private static final String TAG = BaseFragment.class.getSimpleName();
 
-    @Override public void onAttach(Context context){
+    protected Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
         super.onAttach(context);
-        LogUtils.i(TAG,"onAttach");
+        LogUtils.i(TAG, "onAttach");
+        mContext = context;
     }
 
-    @Override public void onCreate(Bundle savedInstanceState){
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.i(TAG,"onCreate");
+        LogUtils.i(TAG, "onCreate");
     }
 
-    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        LogUtils.i(TAG,"onCreateView");
-        return createView(inflater,container,savedInstanceState);
-    }
-    public abstract View createView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState);
-
-    @Override public void onViewCreated(View view,Bundle savedInstanceState){
-        super.onViewCreated(view,savedInstanceState);
-        LogUtils.i(TAG,"onViewCreated");
-        ButterKnife.bind(this,view);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        LogUtils.i(TAG, "onCreateView");
+        return createView(inflater, container, savedInstanceState);
     }
 
-    @Override public void onStart(){
+    public abstract View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        LogUtils.i(TAG, "onViewCreated");
+        ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onStart() {
         super.onStart();
-        LogUtils.i(TAG,"onStart");
+        LogUtils.i(TAG, "onStart");
     }
 
-    @Override public void onResume(){
+    @Override
+    public void onResume() {
         super.onResume();
-        LogUtils.i(TAG,"onResume");
+        LogUtils.i(TAG, "onResume");
     }
 
-    @Override public void onPause(){
+    @Override
+    public void onPause() {
         super.onPause();
-        LogUtils.i(TAG,"onPause");
+        LogUtils.i(TAG, "onPause");
     }
 
-    @Override public void onStop(){
+    @Override
+    public void onStop() {
         super.onStop();
-        LogUtils.i(TAG,"onStop");
+        LogUtils.i(TAG, "onStop");
     }
 
-    @Override public void onDestroyView(){
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
-        LogUtils.i(TAG,"onDestroyView");
+        LogUtils.i(TAG, "onDestroyView");
     }
 
-    @Override public void onDestroy(){
+    @Override
+    public void onDestroy() {
         super.onDestroy();
-        LogUtils.i(TAG,"onDestroy");
+        LogUtils.i(TAG, "onDestroy");
     }
 
-    @Override public void onDetach(){
+    @Override
+    public void onDetach() {
         super.onDetach();
-        LogUtils.i(TAG,"onDetach");
+        LogUtils.i(TAG, "onDetach");
     }
 }

@@ -15,7 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.koma.meidacategory.audio.AudioFragment;
+import com.koma.meidacategory.audio.AudioPresenter;
 import com.koma.meidacategory.base.BaseActivity;
+import com.koma.meidacategory.data.MediaRepository;
 import com.koma.meidacategory.util.LogUtils;
 
 import butterknife.BindArray;
@@ -71,11 +73,13 @@ public class MainActivity extends BaseActivity
         mPresenter = new MainPresenter(this);
 
         MainPagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager(), mTitles);
-        adapter.addFragment(new AudioFragment());
+        AudioFragment audioFragment = new AudioFragment();
+        new AudioPresenter(audioFragment, MediaRepository.getInstance());
+        adapter.addFragment(audioFragment);
         adapter.addFragment(new AudioFragment());
         adapter.addFragment(new AudioFragment());
         mViewPager.setAdapter(adapter);
-        //mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setCurrentItem(0);
 
         mTabLayout.setupWithViewPager(mViewPager);

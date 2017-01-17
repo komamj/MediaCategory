@@ -1,83 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeightLarge">
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:background="@drawable/selector_item_white"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <RelativeLayout
-        android:id="@+id/item_contain_view"
+    <com.koma.meidacategory.widget.SquareImageView
+        android:id="@+id/iv_album"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:layout_toEndOf="@+id/iv_album"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/select_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:gravity="center"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/iv_file_image"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_toEndOf="@id/select_checkbox"
-            android:gravity="center"
-            android:padding="1dp"
-            android:scaleType="centerCrop" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_toEndOf="@+id/iv_file_image"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="5dp">
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="1"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            tools:text="海阔天空" />
 
+        <TextView
+            android:id="@+id/tv_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            tools:text="黄家驹" />
 
-            <TextView
-                android:id="@+id/tv_file_name"
-                style="@style/TextAppearance.AppCompat.Body1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:maxLines="1"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_file_size"
-                    style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:paddingTop="3dp"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_file_modified_time"
-                    style="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:paddingTop="3dp"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-</FrameLayout>
+    </LinearLayout>
+</RelativeLayout>
