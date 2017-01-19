@@ -45,7 +45,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         holder.mTitle.setText(mData.get(position).getTitle());
         Glide.with(mContext).load(Uri.fromFile(new File(mData.get(position).getFilePath())))
-                .placeholder(R.mipmap.default_video_thumbnail)
+                .placeholder(R.mipmap.default_image_thumbnail)
                 .crossFade(Constants.ANIMATION_TIME)
                 .into(holder.mImageView);
     }
