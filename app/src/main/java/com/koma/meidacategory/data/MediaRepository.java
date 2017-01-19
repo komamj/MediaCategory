@@ -1,6 +1,8 @@
 package com.koma.meidacategory.data;
 
 import com.koma.meidacategory.data.model.AudioFile;
+import com.koma.meidacategory.data.model.ImageFile;
+import com.koma.meidacategory.data.model.VideoFile;
 import com.koma.meidacategory.util.LogUtils;
 
 import java.util.List;
@@ -35,5 +37,15 @@ public class MediaRepository implements MediaDataSource {
     public Observable<List<AudioFile>> getAudioFiles() {
         LogUtils.i(TAG, "getAudioFiles");
         return mLocalDataSource.getAudioFiles();
+    }
+
+    @Override
+    public Observable<List<VideoFile>> getVideoFiles() {
+        return mLocalDataSource.getVideoFiles();
+    }
+
+    @Override
+    public Observable<List<ImageFile>> getImageFiles() {
+        return mLocalDataSource.getImageFiles();
     }
 }

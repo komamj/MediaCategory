@@ -1,10 +1,12 @@
-package com.koma.meidacategory.video;
+package com.koma.meidacategory.image;
 
 import android.support.annotation.NonNull;
 
 import com.koma.meidacategory.data.MediaRepository;
+import com.koma.meidacategory.data.model.ImageFile;
 import com.koma.meidacategory.data.model.VideoFile;
 import com.koma.meidacategory.util.LogUtils;
+import com.koma.meidacategory.video.VideoContract;
 
 import java.util.List;
 
@@ -15,21 +17,21 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by koma on 1/17/17.
+ * Created by koma on 1/18/17.
  */
 
-public class VideoPresenter implements VideoContract.Presenter {
-    private static final String TAG = VideoAdapter.class.getSimpleName();
+public class ImagePresenter implements ImageContract.Presenter {
+    private static final String TAG = ImagePresenter.class.getSimpleName();
 
     @NonNull
-    private VideoContract.View mView;
+    private ImageContract.View mView;
     @NonNull
     private MediaRepository mRepository;
 
     private CompositeSubscription mSubscriptions;
-    private Subscription mVideoSubscription;
+    private Subscription mImageSubscription;
 
-    public VideoPresenter(VideoContract.View view, MediaRepository repository) {
+    public ImagePresenter(ImageContract.View view, MediaRepository repository) {
         this.mView = view;
         this.mView.setPresenter(this);
         this.mRepository = repository;
@@ -42,15 +44,15 @@ public class VideoPresenter implements VideoContract.Presenter {
     }
 
     @Override
-    public void getVideoFiles() {
+    public void getImageFiles() {
         LogUtils.i(TAG, "getVideoFiles");
-        if (mVideoSubscription != null) {
-            mSubscriptions.remove(mVideoSubscription);
+        if (mImageSubscription != null) {
+            mSubscriptions.remove(mImageSubscription);
         }
-        mVideoSubscription = mRepository.getVideoFiles()
+        mImageSubscription = mRepository.getImageFiles()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<VideoFile>>() {
+                .subscribe(new Subscriber<List<ImageFile>>() {
                     @Override
                     public void onCompleted() {
                         LogUtils.i(TAG, "getVideoFiles onCompleted");
@@ -62,7 +64,7 @@ public class VideoPresenter implements VideoContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(List<VideoFile> videoFiles) {
+                    public void onNext(List<ImageFile> videoFiles) {
                         if (videoFiles != null) {
                             if (mView != null) {
                                 mView.refreshAdapter(videoFiles);
@@ -70,7 +72,7 @@ public class VideoPresenter implements VideoContract.Presenter {
                         }
                     }
                 });
-        mSubscriptions.add(mVideoSubscription);
+        mSubscriptions.add(mImageSubscription);
     }
 
     @Override

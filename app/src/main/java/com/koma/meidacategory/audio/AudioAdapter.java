@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.koma.meidacategory.R;
 import com.koma.meidacategory.data.model.AudioFile;
+import com.koma.meidacategory.util.Constants;
 import com.koma.meidacategory.util.LogUtils;
 import com.koma.meidacategory.util.MediaCategoryUtils;
 import com.koma.meidacategory.widget.SquareImageView;
@@ -36,17 +37,15 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioViewHol
 
     @Override
     public AudioViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LogUtils.i(TAG, "onCreateViewHolder");
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_view, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.audio_item_view, null);
         return new AudioViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(AudioViewHolder holder, int position) {
-        LogUtils.i(TAG, "onBindViewHolder position : " + position);
         Glide.with(mContext).load(MediaCategoryUtils
                 .getAlbumArtUri(mData.get(position).getAlbumId()))
-                .crossFade(1000)
+                .crossFade(Constants.ANIMATION_TIME)
                 .placeholder(R.mipmap.audio_default).into(holder.mAlbum);
         holder.mTitle.setText(mData.get(position).getTitle());
         holder.mArtist.setText(mData.get(position).getArtist());

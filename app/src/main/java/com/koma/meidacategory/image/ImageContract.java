@@ -1,21 +1,21 @@
-package com.koma.meidacategory.video;
+package com.koma.meidacategory.image;
 
 import com.koma.meidacategory.base.BasePresenter;
 import com.koma.meidacategory.base.BaseView;
-import com.koma.meidacategory.data.model.VideoFile;
+import com.koma.meidacategory.data.model.ImageFile;
 
 import java.util.List;
 
 /**
- * Created by koma on 1/17/17.
+ * Created by koma on 1/18/17.
  */
 
-public class VideoContract {
+public interface ImageContract {
     interface View extends BaseView<Presenter> {
-        void refreshAdapter(List<VideoFile> audioFiles);
+        void refreshAdapter(List<ImageFile> imageFiles);
     }
 
     interface Presenter extends BasePresenter {
-        void getVideoFiles();
+        void getImageFiles();
     }
 }

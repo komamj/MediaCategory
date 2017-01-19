@@ -1,10 +1,15 @@
 package com.koma.meidacategory;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
+import android.text.InputType;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,12 +18,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 
 import com.koma.meidacategory.audio.AudioFragment;
 import com.koma.meidacategory.audio.AudioPresenter;
 import com.koma.meidacategory.base.BaseActivity;
 import com.koma.meidacategory.data.MediaRepository;
+import com.koma.meidacategory.data.model.ImageFile;
+import com.koma.meidacategory.image.ImageFragment;
+import com.koma.meidacategory.image.ImagePresenter;
 import com.koma.meidacategory.util.LogUtils;
+import com.koma.meidacategory.video.VideoFragment;
+import com.koma.meidacategory.video.VideoPresenter;
 
 import butterknife.BindArray;
 import butterknife.BindView;
@@ -43,6 +54,7 @@ public class MainActivity extends BaseActivity
     String[] mTitles;
 
     private MainContract.Presenter mPresenter;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +88,12 @@ public class MainActivity extends BaseActivity
         AudioFragment audioFragment = new AudioFragment();
         new AudioPresenter(audioFragment, MediaRepository.getInstance());
         adapter.addFragment(audioFragment);
-        adapter.addFragment(new AudioFragment());
-        adapter.addFragment(new AudioFragment());
+        VideoFragment videoFragment = new VideoFragment();
+        new VideoPresenter(videoFragment, MediaRepository.getInstance());
+        adapter.addFragment(videoFragment);
+        ImageFragment imageFragment = new ImageFragment();
+        new ImagePresenter(imageFragment, MediaRepository.getInstance());
+        adapter.addFragment(imageFragment);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setCurrentItem(0);
@@ -93,9 +109,13 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        //If SearchView is visible, back key cancels search and iconify it
+        if (mSearchView != null && !mSearchView.isIconified()) {
+            mSearchView.setIconified(true);
+            return;
+        }
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
             LogUtils.i(TAG, "onBackPressed the drawer is open so close drawer firstly.");
         } else {
             super.onBackPressed();
@@ -103,10 +123,42 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    private void initSearchView(final Menu menu) {
+        //Associate searchable configuration with the SearchView
+        LogUtils.i(TAG, "onCreateOptionsMenu setup SearchView!");
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        if (searchItem != null) {
+            MenuItemCompat.setOnActionExpandListener(
+                    searchItem, new MenuItemCompat.OnActionExpandListener() {
+                        @Override
+                        public boolean onMenuItemActionExpand(MenuItem item) {
+                            LogUtils.i(TAG, "onMenuItemActionExpand");
+
+                            return true;
+                        }
+
+                        @Override
+                        public boolean onMenuItemActionCollapse(MenuItem item) {
+                            LogUtils.i(TAG, "onMenuItemActionCollapse");
+
+                            return true;
+                        }
+                    });
+            mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+            mSearchView.setInputType(InputType.TYPE_TEXT_VARIATION_FILTER);
+            mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_FULLSCREEN);
+            mSearchView.setQueryHint(getString(R.string.action_search));
+            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            //mSearchView.setOnQueryTextListener(this);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        initSearchView(menu);
         return true;
     }
 
@@ -118,7 +170,7 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
@@ -131,13 +183,11 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_audio) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_video) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_image) {
 
         } else if (id == R.id.nav_share) {
 

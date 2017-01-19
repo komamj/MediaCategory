@@ -13,7 +13,7 @@ public class AudioFile {
     public AudioFile() {
     }
 
-    public AudioFile(int id, int albumId, String title, String artist) {
+    public AudioFile(int id, int albumId, String title, String artist, String path) {
         this.mId = id;
         this.mAlbumId = albumId;
         this.mTitle = title;
@@ -51,5 +51,4 @@ public class AudioFile {
     public void setAlbumId(int albumId) {
         this.mAlbumId = albumId;
     }
-
 }

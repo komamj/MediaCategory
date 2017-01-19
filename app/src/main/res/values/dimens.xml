@@ -6,4 +6,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="video_item_view_width">168dp</dimen>
+    <dimen name="video_item_view_height">164dp</dimen>
+    <dimen name="video_item_view_image_height">110dp</dimen>
 </resources>

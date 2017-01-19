@@ -71,7 +71,7 @@ public class AudioPresenter implements AudioContract.Presenter {
                     public void onNext(List<AudioFile> audioFiles) {
                         if (audioFiles != null) {
                             if (mView != null) {
-                                mView.refershAdapter(audioFiles);
+                                mView.refreshAdapter(audioFiles);
                             }
                         }
                     }

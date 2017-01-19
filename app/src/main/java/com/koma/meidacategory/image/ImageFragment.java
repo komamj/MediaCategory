@@ -1,9 +1,8 @@
-package com.koma.meidacategory.video;
+package com.koma.meidacategory.image;
 
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.koma.meidacategory.R;
 import com.koma.meidacategory.base.BaseFragment;
-import com.koma.meidacategory.data.model.VideoFile;
+import com.koma.meidacategory.data.model.ImageFile;
 import com.koma.meidacategory.util.Constants;
 import com.koma.meidacategory.util.LogUtils;
 
@@ -22,25 +21,22 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by koma on 1/17/17.
+ * Created by koma on 1/18/17.
  */
 
-public class VideoFragment extends BaseFragment implements VideoContract.View {
-    private static final String TAG = VideoFragment.class.getSimpleName();
+public class ImageFragment extends BaseFragment implements ImageContract.View {
+    private static final String TAG = ImageFragment.class.getSimpleName();
 
-    @NonNull
-    private VideoContract.Presenter mPresenter;
-
-    private List<VideoFile> mData;
-
+    private ImageContract.Presenter mPresenter;
+    private List<ImageFile> mData;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-    private VideoAdapter mAdapter;
+    private ImageAdapter mAdapter;
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_layout, container, false);
+        LogUtils.i(TAG, "createView");
+        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_layout, null);
         return view;
     }
 
@@ -58,18 +54,18 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
         mData = new ArrayList<>();
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, Constants.GRID_COUNT);
         layoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        mAdapter = new VideoAdapter(mContext, mData);
+        mAdapter = new ImageAdapter(mContext, mData);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private final ContentObserver mVideoObserver = new ContentObserver(new Handler()) {
+    private final ContentObserver mImageObserver = new ContentObserver(new Handler()) {
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
             LogUtils.i(TAG, "video uri change so refresh");
             if (mPresenter != null) {
-                mPresenter.getVideoFiles();
+                mPresenter.getImageFiles();
             }
         }
     };
@@ -78,7 +74,7 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
     public void onStart() {
         super.onStart();
         LogUtils.i(TAG, "onStart");
-        mContext.getContentResolver().registerContentObserver(Constants.VIDEO_URI, true, mVideoObserver);
+        mContext.getContentResolver().registerContentObserver(Constants.VIDEO_URI, true, mImageObserver);
     }
 
     @Override
@@ -86,7 +82,7 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
         super.onResume();
         LogUtils.i(TAG, "onResume");
         if (mPresenter != null) {
-            mPresenter.getVideoFiles();
+            mPresenter.getImageFiles();
         }
     }
 
@@ -94,8 +90,8 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
     public void onPause() {
         super.onPause();
         LogUtils.i(TAG, "onPause");
-        if (mVideoObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mVideoObserver);
+        if (mImageObserver != null) {
+            mContext.getContentResolver().unregisterContentObserver(mImageObserver);
         }
     }
 
@@ -108,21 +104,22 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
         }
     }
 
+
     @Override
-    public void refreshAdapter(List<VideoFile> audioFiles) {
-        LogUtils.i(TAG, "refreshAdapter");
+    public void setPresenter(ImageContract.Presenter presenter) {
+        LogUtils.i(TAG, "setPresenter");
+        mPresenter = presenter;
+    }
+
+    @Override
+    public void refreshAdapter(List<ImageFile> imageFiles) {
+        LogUtils.i(TAG, "refreshAdapter" + imageFiles.toString());
         if (mData != null) {
             mData.clear();
-            mData.addAll(audioFiles);
+            mData.addAll(imageFiles);
             if (mAdapter != null) {
                 mAdapter.notifyDataSetChanged();
             }
         }
-    }
-
-    @Override
-    public void setPresenter(@NonNull VideoContract.Presenter presenter) {
-        LogUtils.i(TAG, "setPresenter");
-        mPresenter = presenter;
     }
 }

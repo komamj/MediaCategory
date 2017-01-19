@@ -1,4 +1,4 @@
-package com.koma.meidacategory.video;
+package com.koma.meidacategory.image;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.koma.meidacategory.R;
-import com.koma.meidacategory.data.model.VideoFile;
+import com.koma.meidacategory.data.model.ImageFile;
 import com.koma.meidacategory.util.Constants;
+import com.koma.meidacategory.util.LogUtils;
 import com.koma.meidacategory.widget.SquareImageView;
 
 import java.io.File;
@@ -21,33 +22,32 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by koma on 1/17/17.
+ * Created by koma on 1/18/17.
  */
 
-public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder> {
-    private static final String TAG = VideoAdapter.class.getSimpleName();
+public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
+    private static final String TAG = ImageAdapter.class.getSimpleName();
     private Context mContext;
-    private List<VideoFile> mData;
+    private List<ImageFile> mData;
 
-    public VideoAdapter(Context context, List<VideoFile> data) {
+    public ImageAdapter(Context context, List<ImageFile> data) {
         mContext = context;
         mData = data;
     }
 
     @Override
-    public VideoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.video_item_view, null);
-        return new VideoViewHolder(view);
+        return new ImageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(VideoViewHolder holder, int position) {
+    public void onBindViewHolder(ImageViewHolder holder, int position) {
         holder.mTitle.setText(mData.get(position).getTitle());
         Glide.with(mContext).load(Uri.fromFile(new File(mData.get(position).getFilePath())))
                 .placeholder(R.mipmap.default_video_thumbnail)
                 .crossFade(Constants.ANIMATION_TIME)
                 .into(holder.mImageView);
-
     }
 
     @Override
@@ -55,14 +55,14 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         return mData == null ? 0 : mData.size();
     }
 
-    static class VideoViewHolder extends RecyclerView.ViewHolder {
+    static class ImageViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_video)
         SquareImageView mImageView;
 
         @BindView(R.id.tv_title)
         TextView mTitle;
 
-        public VideoViewHolder(View itemView) {
+        public ImageViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

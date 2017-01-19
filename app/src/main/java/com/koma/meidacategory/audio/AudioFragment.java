@@ -72,7 +72,12 @@ public class AudioFragment extends BaseFragment implements AudioContract.View {
         if (mPresenter != null) {
             mPresenter.subscribe();
         }
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtils.i(TAG, "onStart");
         mContext.getContentResolver().registerContentObserver(Constants.AUDIO_URI, true, mAudioObserver);
     }
 
@@ -97,7 +102,16 @@ public class AudioFragment extends BaseFragment implements AudioContract.View {
     }
 
     @Override
-    public void refershAdapter(List<AudioFile> audioFiles) {
+    public void onPause() {
+        super.onPause();
+        LogUtils.i(TAG, "onPause");
+        if (mAudioObserver != null) {
+            mContext.getContentResolver().unregisterContentObserver(mAudioObserver);
+        }
+    }
+
+    @Override
+    public void refreshAdapter(List<AudioFile> audioFiles) {
         LogUtils.i(TAG, "refershAdapter");
         if (mData != null) {
             mData.clear();
@@ -112,9 +126,6 @@ public class AudioFragment extends BaseFragment implements AudioContract.View {
         LogUtils.i(TAG, "onDestroyView");
         if (mPresenter != null) {
             mPresenter.unSubscribe();
-        }
-        if (mAudioObserver != null) {
-            mContext.getContentResolver().unregisterContentObserver(mAudioObserver);
         }
     }
 }

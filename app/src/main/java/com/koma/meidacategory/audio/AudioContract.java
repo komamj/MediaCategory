@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface AudioContract {
     interface View extends BaseView<Presenter> {
-        void refershAdapter(List<AudioFile> audioFiles);
+        void refreshAdapter(List<AudioFile> audioFiles);
     }
 
     interface Presenter extends BasePresenter {

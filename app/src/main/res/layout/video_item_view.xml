@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/video_item_view_width"
+    android:layout_height="@dimen/video_item_view_height"
+    android:padding="4dp">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="6dp">
+
+
+        <com.koma.meidacategory.widget.SquareImageView
+            android:id="@+id/iv_video"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/video_item_view_image_height"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:marqueeRepeatLimit="1"
+            android:maxLines="1" />
+    </android.support.v7.widget.CardView>
+</LinearLayout>
