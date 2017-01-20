@@ -15,3 +15,29 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn android.support.v7.**
+
+-keep class android.support.v4.* { *; }
+-keep class android.support.v4.*.* { *; }
+-keep class android.support.v7.* { *; }
+-keep class android.support.v7.*.* { *; }
+-keep class android.support.v13.* { *; }
+-keep class android.support.v13.*.* { *; }
+-keep class android.support.design.* { *; }
+-keep class android.support.design.*.* { *; }
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+ long producerIndex;
+ long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+ rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}

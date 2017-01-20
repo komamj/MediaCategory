@@ -4,7 +4,6 @@ import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.koma.meidacategory.widget.DividerItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * Created by koma on 2017/1/14.
@@ -28,9 +26,6 @@ import butterknife.BindView;
 public class AudioFragment extends BaseFragment implements AudioContract.View {
     private static final String TAG = AudioFragment.class.getSimpleName();
     private AudioContract.Presenter mPresenter;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
 
     private AudioAdapter mAdapter;
 
@@ -117,6 +112,11 @@ public class AudioFragment extends BaseFragment implements AudioContract.View {
             mData.clear();
             mData.addAll(audioFiles);
             mAdapter.notifyDataSetChanged();
+        }
+        if (audioFiles == null || audioFiles.size() == 0) {
+            showEmptyView();
+        } else {
+            hideEmptyView();
         }
     }
 

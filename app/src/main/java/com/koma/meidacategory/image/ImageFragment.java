@@ -4,7 +4,6 @@ import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.koma.meidacategory.util.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * Created by koma on 1/18/17.
@@ -28,9 +26,9 @@ public class ImageFragment extends BaseFragment implements ImageContract.View {
     private static final String TAG = ImageFragment.class.getSimpleName();
 
     private ImageContract.Presenter mPresenter;
+
     private List<ImageFile> mData;
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+
     private ImageAdapter mAdapter;
 
     @Override
@@ -82,7 +80,12 @@ public class ImageFragment extends BaseFragment implements ImageContract.View {
         super.onResume();
         LogUtils.i(TAG, "onResume");
         if (mPresenter != null) {
-            mPresenter.getImageFiles();
+            mRecyclerView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPresenter.getImageFiles();
+                }
+            }, 100L);
         }
     }
 
@@ -113,13 +116,18 @@ public class ImageFragment extends BaseFragment implements ImageContract.View {
 
     @Override
     public void refreshAdapter(List<ImageFile> imageFiles) {
-        LogUtils.i(TAG, "refreshAdapter" + imageFiles.toString());
+        LogUtils.i(TAG, "refreshAdapter");
         if (mData != null) {
             mData.clear();
             mData.addAll(imageFiles);
             if (mAdapter != null) {
                 mAdapter.notifyDataSetChanged();
             }
+        }
+        if (imageFiles == null || imageFiles.size() == 0) {
+            showEmptyView();
+        } else {
+            hideEmptyView();
         }
     }
 }

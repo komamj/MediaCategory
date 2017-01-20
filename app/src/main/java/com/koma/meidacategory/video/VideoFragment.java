@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.koma.meidacategory.util.LogUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 
 /**
  * Created by koma on 1/17/17.
@@ -32,9 +30,6 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
     private VideoContract.Presenter mPresenter;
 
     private List<VideoFile> mData;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
 
     private VideoAdapter mAdapter;
 
@@ -109,14 +104,19 @@ public class VideoFragment extends BaseFragment implements VideoContract.View {
     }
 
     @Override
-    public void refreshAdapter(List<VideoFile> audioFiles) {
+    public void refreshAdapter(List<VideoFile> videoFiles) {
         LogUtils.i(TAG, "refreshAdapter");
         if (mData != null) {
             mData.clear();
-            mData.addAll(audioFiles);
+            mData.addAll(videoFiles);
             if (mAdapter != null) {
                 mAdapter.notifyDataSetChanged();
             }
+        }
+        if (videoFiles == null || videoFiles.size() == 0) {
+            showEmptyView();
+        } else {
+            hideEmptyView();
         }
     }
 

@@ -3,12 +3,17 @@ package com.koma.meidacategory.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.koma.meidacategory.R;
 import com.koma.meidacategory.util.LogUtils;
 
+import butterknife.BindString;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -19,6 +24,12 @@ public abstract class BaseFragment extends Fragment {
     private static final String TAG = BaseFragment.class.getSimpleName();
 
     protected Context mContext;
+    @BindString(R.string.loading)
+    String mLoadingString;
+    @BindView(R.id.recycler_view)
+    protected RecyclerView mRecyclerView;
+    @BindView(R.id.empty_view)
+    TextView mEmptyView;
 
     @Override
     public void onAttach(Context context) {
@@ -46,6 +57,18 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LogUtils.i(TAG, "onViewCreated");
         ButterKnife.bind(this, view);
+    }
+
+    protected void showEmptyView() {
+        if (mEmptyView != null) {
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    protected void hideEmptyView() {
+        if (mEmptyView != null) {
+            mEmptyView.setVisibility(View.GONE);
+        }
     }
 
     @Override

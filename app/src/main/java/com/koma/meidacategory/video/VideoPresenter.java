@@ -19,7 +19,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class VideoPresenter implements VideoContract.Presenter {
-    private static final String TAG = VideoAdapter.class.getSimpleName();
+    private static final String TAG = VideoPresenter.class.getSimpleName();
 
     @NonNull
     private VideoContract.View mView;

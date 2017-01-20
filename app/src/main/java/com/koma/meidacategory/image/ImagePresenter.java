@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.koma.meidacategory.data.MediaRepository;
 import com.koma.meidacategory.data.model.ImageFile;
-import com.koma.meidacategory.data.model.VideoFile;
 import com.koma.meidacategory.util.LogUtils;
-import com.koma.meidacategory.video.VideoContract;
 
 import java.util.List;
 

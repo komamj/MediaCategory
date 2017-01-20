@@ -10,4 +10,8 @@
     <dimen name="video_item_view_width">168dp</dimen>
     <dimen name="video_item_view_height">164dp</dimen>
     <dimen name="video_item_view_image_height">110dp</dimen>
+
+    <!--EmptyView-->
+    <dimen name="empty_text_marigin_top">35dp</dimen>
+    <dimen name="empty_text_sise">16sp</dimen>
 </resources>

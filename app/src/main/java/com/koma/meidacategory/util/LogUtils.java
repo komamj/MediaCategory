@@ -1,13 +1,16 @@
 package com.koma.meidacategory.util;
 
+
 import android.util.Log;
+
+import com.koma.meidacategory.BuildConfig;
 
 /**
  * Created by koma on 2017/1/14.
  */
 
 public class LogUtils {
-    private static final boolean IS_DEBUG = true;
+    private static final boolean IS_DEBUG = BuildConfig.LOG_DEBUG;
     private static final String TAG = "MediaCategory";
 
     public static void i(String tag, String msg) {

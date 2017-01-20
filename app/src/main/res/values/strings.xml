@@ -15,4 +15,8 @@
     <string name="audio">Audio</string>
     <string name="video">Video</string>
     <string name="image">Image</string>
+
+    <!--LoadingView-->
+    <string name="loading">Loading...</string>
+    <string name="no_file">No File</string>
 </resources>
