@@ -99,6 +99,13 @@ public class MainActivity extends BaseActivity
         mViewPager.setCurrentItem(0);
 
         mTabLayout.setupWithViewPager(mViewPager);
+        test();
+    }
+
+    private void test() {
+        MyTest myTest = new MyTest();
+        int a = MyTest.findIndex(new int[]{10, 5, 2, 1, 0}, true, 4);
+        LogUtils.i(TAG, "a  : " + a);
     }
 
     @Override
