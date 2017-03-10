@@ -7,4 +7,7 @@
     <!-- Common colors -->
     <color name="list_choice_normal_bg_light">#FFFAFAFA</color>
     <color name="list_choice_pressed_bg_light">#FFDDDDDD</color>
+
+    <!--VideoPlayerActivity-->
+    <color name="player_background">#CD131313</color>
 </resources>

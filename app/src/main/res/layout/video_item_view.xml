@@ -13,7 +13,7 @@
         app:cardElevation="6dp">
 
 
-        <com.koma.meidacategory.widget.SquareImageView
+        <com.koma.mediacategory.widget.SquareImageView
             android:id="@+id/iv_video"
             android:layout_width="match_parent"
             android:layout_height="@dimen/video_item_view_image_height"

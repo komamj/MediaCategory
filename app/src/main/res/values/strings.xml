@@ -19,4 +19,6 @@
     <!--LoadingView-->
     <string name="loading">Loading...</string>
     <string name="no_file">No File</string>
+
+    <string name="play_error">File of this type is not supported</string>
 </resources>

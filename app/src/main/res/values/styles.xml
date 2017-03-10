@@ -30,4 +30,11 @@
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="VideoPlayerTheme" parent="AppTheme.NoActionBar">
+    </style>
 </resources>
